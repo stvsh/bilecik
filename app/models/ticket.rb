@@ -13,4 +13,6 @@ class Ticket < ApplicationRecord
   validates :price,
     :presence => true,
     :numericality => { greater_than: 0 }
+
+  belongs_to :event
 end

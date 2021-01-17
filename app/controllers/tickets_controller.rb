@@ -1,5 +1,6 @@
 class TicketsController < ApplicationController
   before_action :set_ticket, only: [:show, :edit, :update, :destroy]
+  before_action :set_events, only: [:show, :new, :edit, :update]
 
   # GET /tickets
   # GET /tickets.json
@@ -67,8 +68,12 @@ class TicketsController < ApplicationController
       @ticket = Ticket.find(params[:id])
     end
 
+    def set_events
+      @events = Event.all
+    end
+
     # Only allow a list of trusted parameters through.
     def ticket_params
-      params.require(:ticket).permit(:name, :seat_id_seq, :address, :price, :email_address, :phone)
+      params.require(:ticket).permit(:name, :seat_id_seq, :address, :price, :email_address, :phone, :event_id)
     end
 end
