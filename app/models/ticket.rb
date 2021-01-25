@@ -15,4 +15,5 @@ class Ticket < ApplicationRecord
     :numericality => { greater_than: 0 }
 
   belongs_to :event
+  belongs_to :user
 end

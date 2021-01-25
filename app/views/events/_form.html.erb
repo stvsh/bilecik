@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= form.label :artist %>
-    <%= form.text_field :artist %>
+    <%= form.text_field :artist, required: true %>
   </div>
 
   <div class="field">
@@ -23,20 +23,20 @@
 
   <div class="field">
     <%= form.label :price_low %>
-    <%= form.number_field :price_low, value: number_to_currency(form.object.price_low, delimiter: '.', unit: ''), step: :any %>
+    <%= form.number_field :price_low, required: true, value: number_to_currency(form.object.price_low, delimiter: '.', unit: ''), step: :any %>
   </div>
 
   <div class="field">
     <%= form.label :price_high %>
-    <%= form.number_field :price_high, value: number_to_currency(form.object.price_high, delimiter: '.', unit: ''), step: :any %>
+    <%= form.number_field :price_high, required: true, value: number_to_currency(form.object.price_high, delimiter: '.', unit: ''), step: :any %>
   </div>
 
   <div class="field">
     <%= form.label :event_date %>
-    <%= form.date_select :event_date %>
+    <%= form.date_select :event_date, required: true %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit 'Create', :class => 'btn btn-primary' %>
   </div>
 <% end %>

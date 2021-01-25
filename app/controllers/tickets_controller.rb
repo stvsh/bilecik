@@ -1,4 +1,6 @@
 class TicketsController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :corect_user, only: [:edit, :update, :destroy] 
   before_action :set_ticket, only: [:show, :edit, :update, :destroy]
   before_action :set_events, only: [:show, :new, :edit, :update]
 
@@ -75,5 +77,10 @@ class TicketsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def ticket_params
       params.require(:ticket).permit(:name, :seat_id_seq, :address, :price, :email_address, :phone, :event_id)
+    end
+
+    def correct_user 
+      @ticket = current_user.tickets.find_by(id: params[:id])
+      redirect_to tickets_path, notice: "You are not allowed to edit this ticket" if @ticket.nil?
     end
 end
