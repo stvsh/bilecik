@@ -1,39 +1,38 @@
-<p id="notice"><%= notice %></p>
+<h1 class="m-3 display-5">My tickets</h1>
 
-<div class="container p-3">
-    <h4>My tickets</h4>
-
-    <% if tickets.length > 0 %>
-        <table>
-        <thead>
-            <tr>
+<% if tickets.length > 0 %>
+    <table class="table table-striped">
+        <thead class="thead-dark">
+        <tr>
             <th>Name</th>
             <th>Seat id seq</th>
             <th>Address</th>
             <th>Price</th>
-            <th>Email address</th>
             <th>Phone number</th>
+            <th>Event</th>
             <th colspan="3"></th>
-            </tr>
+        </tr>
         </thead>
 
         <tbody>
-            <% tickets.each do |ticket| %>
+        <% tickets.each do |ticket| %>
             <tr>
-                <td><%= ticket.name %></td>
-                <td><%= ticket.seat_id_seq %></td>
-                <td><%= ticket.address %></td>
-                <td><%= ticket.price %></td>
-                <td><%= ticket.email_address %></td>
-                <td><%= ticket.phone %></td>
-                <td><%= link_to 'Show', ticket %></td>
-                <td><%= link_to 'Edit', edit_ticket_path(ticket) %></td>
-                <td><%= link_to 'Destroy', ticket, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-            </tr>
+            <td><%= ticket.name %></td>
+            <td><%= ticket.seat_id_seq %></td>
+            <td><%= ticket.address %></td>
+            <td><%= ticket.price %></td>
+            <td><%= ticket.phone %></td>
+            <td><%= ticket.event.artist %>
+            <td><%= link_to 'Show', ticket, :class => 'btn btn-sm btn-light' %></td>
+
+            <% if ticket.user == current_user %>
+                <td><%= link_to 'Edit', edit_ticket_path(ticket), :class => 'btn btn-sm btn-warning'  %></td>
+                <td><%= link_to 'Destroy', ticket, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-sm btn-danger' %></td>
             <% end %>
+            </tr>
+        <% end %>
         </tbody>
-        </table>
-    <% else %>
-        <p>No tickets purchased</p>
-    <% end %>
-</div>
+    </table>
+<% else %>
+    <p>No tickets purchased</p>
+<% end %>

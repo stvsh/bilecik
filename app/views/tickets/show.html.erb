@@ -1,43 +1,21 @@
-<p id="notice"><%= notice %></p>
+<div class="container p-3 mt-5 w-50 text-center">
+  <div class="card mx-auto" style="width: 30rem;">
+      <div class="card-body">
+        <h5 class="card-title">Ticket info</h5>
 
-<div class="container w-50 mx-auto p3">
-<p>
-  <strong>Name:</strong>
-  <%= @ticket.name %>
-</p>
+        <ul class="list-group list-group-flush text-left">
+          <li class="list-group-item "><strong>Name: </strong></strong><%= @ticket.name %></li>
+          <li class="list-group-item"><strong>Seat id seq: </strong><%= @ticket.seat_id_seq %></li>
+          <li class="list-group-item"><strong>Address: </strong><%= @ticket.address %></li>
+          <li class="list-group-item"><strong>Email address: </strong><%= @ticket.email_address %></li>
+          <li class="list-group-item"><strong>Phone number: </strong><%= @ticket.phone %></li>
+          <li class="list-group-item"><strong>Event: </strong><%= @ticket.event.artist %></li>
+        </ul>
+      </div>
+    </div>
 
-<p>
-  <strong>Seat id seq:</strong>
-  <%= @ticket.seat_id_seq %>
-</p>
-
-<p>
-  <strong>Address:</strong>
-  <%= @ticket.address %>
-</p>
-
-<p>
-  <strong>Price:</strong>
-  <%= @ticket.price %>
-</p>
-
-<p>
-  <strong>Email address:</strong>
-  <%= @ticket.email_address %>
-</p>
-
-<p>
-  <strong>Phone number:</strong>
-  <%= @ticket.phone %>
-</p>
-
-<p>
-  <strong>Event:</strong>
-  <%= @ticket.event.artist %>
-</p>
-
-<% if @ticket.user == current_user %>
-  <%= link_to 'Edit', edit_ticket_path(@ticket) %> |
-<% end %>
-<%= link_to 'Back', tickets_path %>
+    <% if @ticket.user == current_user %>
+      <%= link_to 'Edit', edit_ticket_path(@ticket), :class => 'w-25 mt-3 btn btn-warning' %>
+    <% end %>
+    <%= link_to 'Back', tickets_path, :class => 'w-25 mt-3 btn btn-secondary' %>
 </div>

@@ -11,23 +11,37 @@
   </head>
 
   <body>
+    <nav class="navbar navbar-expand navbar-dark bg-dark">
+      <a class="navbar-brand h1 text-white" href="/">Bilecik</a>
+
+      <a class="<%= active_class(events_path) %> nav-item nav-link" href="/events">Events</a>
+      <% if user_signed_in? %>
+        <a class="<%= active_class(tickets_path) %> nav-item nav-link" href="/tickets">Tickets</a>
+      <% end %>
+
+      <% if user_signed_in? %>
+        <div class="ml-auto">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <%= current_user.email%>
+          </button>
+          <div class="dropdown-menu dropdown-menu-right text-left" aria-labelledby="dropdownMenuButton">
+            <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'dropdown-item' %>
+          </div>
+        </div>
+      <% else %>
+        <div class="ml-auto">
+          <%= link_to "Sign up", new_user_registration_path, :class => 'btn btn-primary' %>
+          <%= link_to "Log in", new_user_session_path, :class => 'btn btn-primary' %>
+        </div>
+      <% end %>
+    </nav>
+
     <%if notice %>
-      <p class="alert alert-success"><%= notice %></p>
+      <div class="alert alert-success"><%= notice %></div>
     <%end%>
     <%if alert %>
-      <p class="alert alert-danger"><%= alert %></p>
+      <div class="alert alert-danger"><%= alert %></p>
     <%end%>
-
-    <p class="navbar-text pull-right">
-      <% if user_signed_in? %>
-        Logged in as <strong><%= current_user.email%></strong>.
-        <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link'%>
-        <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'%>
-      <% else %>
-        <%= link_to "Sign up", new_user_registration_path, :class=>'navbar-link'%>
-        <%= link_to "Login", new_user_session_path, :class=>'navbar-link'%>
-      <% end %>
-    </p>
     
     <%= yield %>
   </body>

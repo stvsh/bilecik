@@ -1,4 +1,4 @@
-<div class="container p-3 border">
+<div class="container p-3">
 <h4>Buy ticket</h4>
 
 <%= form_with(model: ticket) do |form| %>
@@ -44,7 +44,7 @@
   <%= form.hidden_field :email_address %>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit :class => 'w-25 mt-2 btn btn-primary' %>
   </div>
 <% end %>
 </div>

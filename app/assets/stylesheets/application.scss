@@ -14,3 +14,11 @@
 
 @import "bootstrap/scss/bootstrap";
 @import url('https://fonts.googleapis.com/css?family=Merriweather:400,700');
+
+body {
+    background-color: lightgrey;
+}
+
+.dropdown-toggle::after {
+    display:none;
+}
