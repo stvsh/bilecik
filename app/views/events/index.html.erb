@@ -1,8 +1,10 @@
-<h1>All events</h1>
-<ul>
-  <% for event in @events %>
-    <li><%= link_to event.artist, "/events/#{event.id}" %></li>
-  <% end %>
-</ul>
+<div class="containter w-50 mx-auto p-2">
+  <h1>All events</h1>
+  <ul class="list-group">
+    <% for event in @events %>
+      <li class="list-group-item"><%= link_to event.artist, "/events/#{event.id}" %></li>
+    <% end %>
+  </ul>
 
-<%= link_to 'New event', new_event_path, class: 'btn btn-primary' %>
+  <%= link_to 'New event', new_event_path, class: 'btn btn-primary mt-3' %>
+</div>

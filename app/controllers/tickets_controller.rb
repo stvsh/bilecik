@@ -1,13 +1,12 @@
 class TicketsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :corect_user, only: [:edit, :update, :destroy] 
+  before_action :correct_user, only: [:edit, :update, :destroy] 
   before_action :set_ticket, only: [:show, :edit, :update, :destroy]
-  before_action :set_events, only: [:show, :new, :edit, :update]
 
   # GET /tickets
   # GET /tickets.json
   def index
-    @tickets = Ticket.all
+    @tickets = current_user.tickets
   end
 
   # GET /tickets/1
@@ -17,7 +16,7 @@ class TicketsController < ApplicationController
 
   # GET /tickets/new
   def new
-    @ticket = Ticket.new
+    @ticket = current_user.tickets.new(:email_address => current_user.email)
   end
 
   # GET /tickets/1/edit
@@ -27,7 +26,8 @@ class TicketsController < ApplicationController
   # POST /tickets
   # POST /tickets.json
   def create
-    @ticket = Ticket.new(ticket_params)
+    @ticket = current_user.tickets.new(ticket_params)
+    @event = Event.find(ticket_params[:event_id])
 
     respond_to do |format|
       if @ticket.save
@@ -70,13 +70,9 @@ class TicketsController < ApplicationController
       @ticket = Ticket.find(params[:id])
     end
 
-    def set_events
-      @events = Event.all
-    end
-
     # Only allow a list of trusted parameters through.
     def ticket_params
-      params.require(:ticket).permit(:name, :seat_id_seq, :address, :price, :email_address, :phone, :event_id)
+      params.require(:ticket).permit(:name, :seat_id_seq, :address, :price, :email_address, :phone, :event_id, :user_id)
     end
 
     def correct_user 

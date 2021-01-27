@@ -14,9 +14,6 @@ class Event < ApplicationRecord
     :presence => true,
     :allow_blank => false,
     :allow_nil => false
-
-  validates :phone_number,
-    :presence => true
   
   has_many :tickets
 

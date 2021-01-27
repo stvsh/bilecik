@@ -1,3 +1,4 @@
+<div class="container p-3 w-50 mx-auto">
 <p id="notice"><%= flash[:notice] %></p>
 
 <p>
@@ -27,12 +28,8 @@
 
 <br>
 
-<%= render "tickets_list", tickets: @event.tickets %>
+<%= render "tickets_list", tickets: current_user.tickets.where(event_id: @event.id) %>
+<%= render "new_ticket", ticket: Ticket.new(:event_id => @event.id, :user_id => current_user.id, :email_address => current_user.email) %>
 
-<br>
-
-<%= render "new_ticket", ticket: Ticket.new(:event_id => @event.id) %>
-
-<br>
-
-<%= link_to 'Back', events_path %>
+<%= link_to 'Back', events_path, :class => 'btn btn-secondary'%>
+</div>

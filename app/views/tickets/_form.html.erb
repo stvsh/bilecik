@@ -13,40 +13,40 @@
 
   <div class="field">
     <%= form.label :name %>
-    <%= form.text_field :name, required: true %>
+    <%= form.text_field :name %>
   </div>
 
   <div class="field">
     <%= form.label :seat_id_seq %>
-    <%= form.text_field :seat_id_seq, required: true %>
+    <%= form.text_field :seat_id_seq %>
   </div>
 
   <div class="field">
     <%= form.label :address %>
-    <%= form.text_area :address, required: true %>
+    <%= form.text_area :address %>
   </div>
 
   <div class="field">
     <%= form.label :price %>
-    <%= form.number_field :price, required: true, value: number_to_currency(form.object.price, delimiter: '.', unit: ''), step: :any %>
-  </div>
-
-  <div class="field">
-    <%= form.label :email_address %>
-    <%= form.text_field :email_address, required: true %>
+    <%= form.text_field :price %>
   </div>
 
   <div class="field">
     <%= form.label :phone %>
-    <%= form.text_field :phone, required: true %>
+    <%= form.text_field :phone %>
   </div>
 
-  <div class="field">
-    <%= form.label :event %>
-    <%= form.collection_select :event_id, @events, :id, :artist, include_blank: false %>
-  </div>
+  <%= form.hidden_field :event_id, value: ticket.event_id %>
+  <%= form.hidden_field :email_address, value: ticket.email_address %>
+
+   <% unless ticket.event_id %>
+    <div class="field">
+      <%= form.label :event %>
+      <%= form.collection_select :event_id, Event.all, :id, :artist, include_blank: false %>
+    </div>
+  <% end %>
 
   <div class="actions">
-    <%= form.submit 'Buy', :class => "btn btn-primary" %>
+    <%= form.submit %>
   </div>
 <% end %>

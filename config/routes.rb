@@ -2,5 +2,5 @@ Rails.application.routes.draw do
   devise_for :users
   resources :events, :only => [:index, :new, :create, :show]
   resources :tickets
-  root :to => "tickets#index"
+  root :to => "application#index"
 end
